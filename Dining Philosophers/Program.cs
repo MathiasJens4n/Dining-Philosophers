@@ -43,7 +43,7 @@ namespace v3
                 int forkLeft = (id + 1) % 5;
 
 
-                while (hasBeenEating == false)
+                if (hasBeenEating == false)
                 {
                     Monitor.Enter(locker);
 
@@ -54,7 +54,6 @@ namespace v3
                             forks[forkRight] = true;
                             forks[forkLeft] = true;
                             Console.WriteLine($"Philosopher{id} is eating...");
-                            break;
                         }
                         finally
                         {
@@ -81,11 +80,11 @@ namespace v3
                         }
                     }
                 }
-                while (hasBeenEating == true)
+
+                if(hasBeenEating == true)
                 {
                     Console.WriteLine($"Philosopher{id} is thinking...");
                     Thread.Sleep(rnd.Next(3000, 6000));
-                    break;
                 }
             }
         }
